@@ -1,0 +1,501 @@
+[
+ {
+  "name": "nginx",
+  "category": "Web servers",
+  "headers": "^server:\\s*nginx(?:/([\\d.]+))?"
+ },
+ {
+  "name": "Apache HTTP Server",
+  "category": "Web servers",
+  "headers": "^server:\\s*apache(?:/([\\d.]+))?"
+ },
+ {
+  "name": "LiteSpeed",
+  "category": "Web servers",
+  "headers": "^server:\\s*litespeed"
+ },
+ {
+  "name": "OpenResty",
+  "category": "Web servers",
+  "headers": "^server:\\s*openresty(?:/([\\d.]+))?"
+ },
+ {
+  "name": "Microsoft IIS",
+  "category": "Web servers",
+  "headers": "^server:\\s*microsoft-iis(?:/([\\d.]+))?"
+ },
+ {
+  "name": "Caddy",
+  "category": "Web servers",
+  "headers": "^server:\\s*caddy"
+ },
+ {
+  "name": "Envoy",
+  "category": "Web servers",
+  "headers": "^server:\\s*envoy(?:/([\\d.]+))?"
+ },
+ {
+  "name": "Google Web Server",
+  "category": "Web servers",
+  "headers": "^server:\\s*gws"
+ },
+ {
+  "name": "Cloudflare",
+  "category": "CDN",
+  "headers": [
+   "^server:\\s*cloudflare",
+   "^cf-ray:"
+  ]
+ },
+ {
+  "name": "Fastly",
+  "category": "CDN",
+  "headers": "^x-fastly-request-id:"
+ },
+ {
+  "name": "Akamai",
+  "category": "CDN",
+  "headers": [
+   "^server:\\s*akamaighost",
+   "^x-akamai-"
+  ]
+ },
+ {
+  "name": "Amazon CloudFront",
+  "category": "CDN",
+  "headers": [
+   "^x-amz-cf-id:",
+   "^via:.*cloudfront"
+  ]
+ },
+ {
+  "name": "Varnish",
+  "category": "Caching",
+  "headers": [
+   "^x-varnish:",
+   "^via:.*varnish"
+  ]
+ },
+ {
+  "name": "Sucuri",
+  "category": "CDN",
+  "headers": "^x-sucuri-id:"
+ },
+ {
+  "name": "Imperva",
+  "category": "CDN",
+  "headers": "^x-iinfo:"
+ },
+ {
+  "name": "PHP",
+  "category": "Programming languages",
+  "headers": "^x-powered-by:\\s*php(?:/([\\d.]+))?"
+ },
+ {
+  "name": "ASP.NET",
+  "category": "Web frameworks",
+  "headers": [
+   "^x-powered-by:\\s*asp\\.net",
+   "^x-aspnet-version:\\s*([\\d.]+)"
+  ]
+ },
+ {
+  "name": "Express",
+  "category": "Web frameworks",
+  "headers": "^x-powered-by:\\s*express"
+ },
+ {
+  "name": "Django",
+  "category": "Web frameworks",
+  "cookies": "(?m)^csrftoken="
+ },
+ {
+  "name": "Laravel",
+  "category": "Web frameworks",
+  "cookies": "(?m)^laravel_session="
+ },
+ {
+  "name": "Next.js",
+  "category": "Web frameworks",
+  "body": [
+   "__NEXT_DATA__",
+   "/_next/static/"
+  ],
+  "headers": "^x-nextjs-"
+ },
+ {
+  "name": "Nuxt",
+  "category": "Web frameworks",
+  "body": [
+   "__NUXT__",
+   "/_nuxt/"
+  ]
+ },
+ {
+  "name": "Gatsby",
+  "category": "Static site generator",
+  "body": [
+   "___gatsby",
+   "/page-data/"
+  ]
+ },
+ {
+  "name": "Astro",
+  "category": "Static site generator",
+  "body": "astro-island"
+ },
+ {
+  "name": "SvelteKit",
+  "category": "Web frameworks",
+  "body": "__sveltekit"
+ },
+ {
+  "name": "Angular",
+  "category": "JavaScript frameworks",
+  "body": [
+   "ng-version=\"([\\d.]+)\"",
+   "\\bng-app="
+  ]
+ },
+ {
+  "name": "React",
+  "category": "JavaScript frameworks",
+  "body": "data-reactroot",
+  "scripts": "react-dom"
+ },
+ {
+  "name": "Vue.js",
+  "category": "JavaScript frameworks",
+  "body": [
+   "data-v-[0-9a-f]{8}",
+   "__VUE__"
+  ],
+  "scripts": "vue(?:@|\\.)([\\d.]+)"
+ },
+ {
+  "name": "jQuery",
+  "category": "JavaScript libraries",
+  "body": [
+   "jquery(?:-|@)([\\d.]+)(?:\\.min)?\\.js",
+   "/jquery(?:\\.min)?\\.js",
+   "jQuery v([\\d.]+)"
+  ]
+ },
+ {
+  "name": "Bootstrap",
+  "category": "UI frameworks",
+  "body": [
+   "bootstrap(?:\\.min)?\\.css",
+   "bootstrap@([\\d.]+)"
+  ]
+ },
+ {
+  "name": "Tailwind CSS",
+  "category": "UI frameworks",
+  "body": [
+   "--tw-[a-z]",
+   "tailwindcss"
+  ]
+ },
+ {
+  "name": "Alpine.js",
+  "category": "JavaScript frameworks",
+  "body": "x-data=",
+  "scripts": "alpinejs"
+ },
+ {
+  "name": "htmx",
+  "category": "JavaScript libraries",
+  "scripts": "htmx",
+  "body": "hx-get="
+ },
+ {
+  "name": "Lodash",
+  "category": "JavaScript libraries",
+  "scripts": "lodash"
+ },
+ {
+  "name": "GSAP",
+  "category": "JavaScript libraries",
+  "scripts": "gsap"
+ },
+ {
+  "name": "RequireJS",
+  "category": "JavaScript libraries",
+  "scripts": "require(?:\\.min)?\\.js"
+ },
+ {
+  "name": "Font Awesome",
+  "category": "Font scripts",
+  "body": "font-?awesome"
+ },
+ {
+  "name": "Google Fonts",
+  "category": "Font scripts",
+  "body": "fonts\\.googleapis\\.com"
+ },
+ {
+  "name": "Google Hosted Libraries",
+  "category": "JavaScript libraries",
+  "scripts": "ajax\\.googleapis\\.com"
+ },
+ {
+  "name": "WordPress",
+  "category": "CMS",
+  "body": [
+   "/wp-content/",
+   "/wp-includes/",
+   "content=\"WordPress ([\\d.]+)"
+  ]
+ },
+ {
+  "name": "Drupal",
+  "category": "CMS",
+  "body": [
+   "Drupal\\.settings",
+   "/sites/default/files"
+  ],
+  "headers": "^x-generator:\\s*Drupal ([\\d.]+)"
+ },
+ {
+  "name": "Joomla",
+  "category": "CMS",
+  "body": [
+   "content=\"Joomla",
+   "joomla-script-options",
+   "/media/jui/",
+   "/media/system/js/"
+  ]
+ },
+ {
+  "name": "Shopify",
+  "category": "E-commerce",
+  "body": "cdn\\.shopify\\.com",
+  "headers": "^x-shopid:",
+  "url": "\\.myshopify\\.com"
+ },
+ {
+  "name": "Magento",
+  "category": "E-commerce",
+  "body": "mage/cookies",
+  "headers": "^x-magento-"
+ },
+ {
+  "name": "WooCommerce",
+  "category": "E-commerce",
+  "body": "woocommerce/assets/|class=\"[^\"]*\\bwoocommerce\\b"
+ },
+ {
+  "name": "PrestaShop",
+  "category": "E-commerce",
+  "body": "prestashop"
+ },
+ {
+  "name": "Wix",
+  "category": "Website builders",
+  "body": "static\\.wixstatic\\.com",
+  "headers": "^x-wix-"
+ },
+ {
+  "name": "Squarespace",
+  "category": "Website builders",
+  "body": "static1\\.squarespace\\.com"
+ },
+ {
+  "name": "Webflow",
+  "category": "Website builders",
+  "body": [
+   "webflow\\.js",
+   "assets\\.website-files\\.com",
+   "data-wf-page"
+  ]
+ },
+ {
+  "name": "Ghost",
+  "category": "CMS",
+  "body": [
+   "content=\"Ghost ([\\d.]+)",
+   "/ghost/api/"
+  ]
+ },
+ {
+  "name": "Blogger",
+  "category": "Blogs",
+  "body": [
+   "blogger\\.com/static",
+   "blogspot"
+  ]
+ },
+ {
+  "name": "TYPO3",
+  "category": "CMS",
+  "body": "typo3conf|/typo3temp/"
+ },
+ {
+  "name": "Craft CMS",
+  "category": "CMS",
+  "cookies": "(?m)^CraftSessionId="
+ },
+ {
+  "name": "BigCommerce",
+  "category": "E-commerce",
+  "body": "cdn\\d*\\.bigcommerce\\.com|bigcommerce\\.com/s-[a-z0-9]+/"
+ },
+ {
+  "name": "MediaWiki",
+  "category": "Wiki",
+  "body": "mw\\.config\\.set|/load\\.php"
+ },
+ {
+  "name": "Docusaurus",
+  "category": "Static site generator",
+  "body": "docusaurus"
+ },
+ {
+  "name": "MkDocs",
+  "category": "Static site generator",
+  "body": "mkdocs"
+ },
+ {
+  "name": "GitBook",
+  "category": "Documentation",
+  "body": "gitbook\\.(?:io|com)"
+ },
+ {
+  "name": "Google Analytics",
+  "category": "Analytics",
+  "body": [
+   "gtag/js\\?id=G-",
+   "google-analytics\\.com/(?:analytics|ga)\\.js",
+   "ga\\('create'"
+  ]
+ },
+ {
+  "name": "Google Tag Manager",
+  "category": "Tag managers",
+  "body": "googletagmanager\\.com/gtm\\.js"
+ },
+ {
+  "name": "Matomo",
+  "category": "Analytics",
+  "body": [
+   "matomo\\.js",
+   "piwik\\.js"
+  ]
+ },
+ {
+  "name": "Plausible",
+  "category": "Analytics",
+  "body": "plausible\\.io/js"
+ },
+ {
+  "name": "Hotjar",
+  "category": "Analytics",
+  "body": "static\\.hotjar\\.com"
+ },
+ {
+  "name": "Microsoft Clarity",
+  "category": "Analytics",
+  "body": "clarity\\.ms/tag"
+ },
+ {
+  "name": "Meta Pixel",
+  "category": "Analytics",
+  "body": "connect\\.facebook\\.net/[^\\\"']*fbevents\\.js"
+ },
+ {
+  "name": "Sentry",
+  "category": "Analytics",
+  "body": [
+   "sentry-cdn\\.com",
+   "@sentry/browser"
+  ]
+ },
+ {
+  "name": "Intercom",
+  "category": "Live chat",
+  "body": "widget\\.intercom\\.io"
+ },
+ {
+  "name": "HubSpot",
+  "category": "Marketing automation",
+  "body": "js\\.hs-scripts\\.com"
+ },
+ {
+  "name": "Cloudflare Browser Insights",
+  "category": "Analytics",
+  "body": "static\\.cloudflareinsights\\.com"
+ },
+ {
+  "name": "Segment",
+  "category": "Analytics",
+  "body": "cdn\\.segment\\.com"
+ },
+ {
+  "name": "Disqus",
+  "category": "Comment systems",
+  "body": "disqus\\.com/embed\\.js"
+ },
+ {
+  "name": "reCAPTCHA",
+  "category": "Security",
+  "body": "google\\.com/recaptcha"
+ },
+ {
+  "name": "hCaptcha",
+  "category": "Security",
+  "body": "hcaptcha\\.com"
+ },
+ {
+  "name": "Stripe",
+  "category": "Payment processors",
+  "body": "js\\.stripe\\.com/v\\d"
+ },
+ {
+  "name": "PayPal",
+  "category": "Payment processors",
+  "body": "paypal\\.com/sdk/js"
+ },
+ {
+  "name": "Algolia",
+  "category": "Search",
+  "body": "algoliasearch"
+ },
+ {
+  "name": "Cloudinary",
+  "category": "Image CDN",
+  "body": "res\\.cloudinary\\.com"
+ },
+ {
+  "name": "Google Maps",
+  "category": "Maps",
+  "body": "maps\\.googleapis\\.com"
+ },
+ {
+  "name": "Vercel",
+  "category": "PaaS",
+  "headers": [
+   "^x-vercel-id:",
+   "^server:\\s*vercel"
+  ],
+  "url": "\\.vercel\\.app"
+ },
+ {
+  "name": "Netlify",
+  "category": "PaaS",
+  "headers": [
+   "^x-nf-request-id:",
+   "^server:\\s*netlify"
+  ]
+ },
+ {
+  "name": "GitHub Pages",
+  "category": "Hosting",
+  "url": "\\.github\\.io"
+ },
+ {
+  "name": "Heroku",
+  "category": "PaaS",
+  "headers": "^via:.*vegur"
+ }
+]
