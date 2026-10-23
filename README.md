@@ -226,3 +226,7 @@ stubbed fetches.
 
 Use this against systems you are authorized to test. `nmap` sends real probes to
 the target, and repeated scanning can trigger firewall blocks.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
