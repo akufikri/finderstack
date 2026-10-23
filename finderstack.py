@@ -461,7 +461,6 @@ def main():
     fingerprints = tech_stack.load_fingerprints()
 
     try:
-        print(f"[*] {domain}: whois, dig, crt.sh, subfinder", file=sys.stderr)
         with ThreadPoolExecutor(max_workers=4) as pool:
             whois_future = pool.submit(whois_lookup, domain)
             dns_future = pool.submit(dns_records, domain)
