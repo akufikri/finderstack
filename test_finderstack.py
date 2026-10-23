@@ -60,6 +60,32 @@ X509v3 Subject Alternative Name:
 """
 
 
+class TidyOutputTest(unittest.TestCase):
+    def test_dns_sorts_mx_and_drops_empty_types(self):
+        result = finderstack.tidy_dns(
+            {
+                "a": ["203.0.113.10"],
+                "aaaa": [],
+                "mx": ["10 alt3.mail.example.", "1 aspmx.mail.example.", "5 alt1.mail.example."],
+                "ns": ["ns2.example.com.", "ns1.example.com."],
+                "txt": ["v=spf1 ~all"],
+            }
+        )
+        self.assertEqual(result["mx"], ["1 aspmx.mail.example", "5 alt1.mail.example", "10 alt3.mail.example"])
+        self.assertEqual(result["ns"], ["ns1.example.com", "ns2.example.com"])
+        self.assertNotIn("aaaa", result)
+
+    def test_hosts_split_unresolved_and_omit_nulls(self):
+        hosts, unresolved = finderstack.tidy_hosts(
+            [
+                {"host": "a.example.com", "ips": ["1.1.1.1"], "ports": [], "tls": None, "http": {"status": 200}},
+                {"host": "b.example.com", "ips": [], "ports": [], "tls": None, "http": None},
+            ]
+        )
+        self.assertEqual(unresolved, ["b.example.com"])
+        self.assertEqual(hosts, [{"host": "a.example.com", "http": {"status": 200}}])
+
+
 class BuildTargetsTest(unittest.TestCase):
     def test_merges_ports_across_ips(self):
         targets = finderstack.build_targets(

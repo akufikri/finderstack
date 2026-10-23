@@ -444,6 +444,36 @@ def analyze_host(target: dict, fingerprints: list[dict]) -> dict:
     return result
 
 
+def tidy_dns(records: dict[str, list[str]]) -> dict[str, list[str]]:
+    """Strip trailing dots, sort MX by priority, drop empty record types."""
+    tidied = {}
+    for key, values in records.items():
+        cleaned = [value.rstrip(".") for value in values]
+        if key == "mx":
+            cleaned.sort(key=lambda item: (int(item.split()[0]), item))
+        else:
+            cleaned.sort()
+        if cleaned:
+            tidied[key] = cleaned
+    return tidied
+
+
+def tidy_hosts(reports: list[dict]) -> tuple[list[dict], list[str]]:
+    """Split resolved hosts from unresolved names; omit empty/null fields."""
+    hosts = []
+    unresolved = []
+    for report in reports:
+        if not report["ips"]:
+            unresolved.append(report["host"])
+            continue
+        entry = {"host": report["host"]}
+        for key in ("ports", "tls", "http"):
+            if report[key]:
+                entry[key] = report[key]
+        hosts.append(entry)
+    return hosts, sorted(unresolved)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Recon a domain (whois, dig, crt.sh, subfinder, nmap, curl) then fingerprint technologies."
@@ -496,23 +526,33 @@ def main():
     except (OSError, RuntimeError) as error:
         sys.exit(f"finderstack failed: {error}")
 
+    tidy_host_list, unresolved = tidy_hosts(reports)
+
     print(
         json.dumps(
             {
                 "domain": domain,
-                "whois": whois_info,
-                "dns": dns,
-                "subdomains": hosts,
-                "subdomain_sources": {
-                    "subfinder": subfinder_hosts,
-                    "crt.sh": crt_hosts,
-                    "apex": [domain],
+                "whois": {
+                    key: value
+                    for key, value in (whois_info or {}).items()
+                    if value not in (None, "", [])
+                },
+                "dns": tidy_dns(dns),
+                "subdomains": {
+                    "total": len(hosts),
+                    "sources": {
+                        "subfinder": len(subfinder_hosts),
+                        "crt.sh": len(crt_hosts),
+                        "shared": len(set(subfinder_hosts) & set(crt_hosts)),
+                    },
+                    "names": hosts,
                 },
                 "ips": {
                     ip: sorted(host for host, values in resolved.items() if ip in values)
                     for ip in ips
                 },
-                "hosts": reports,
+                "hosts": tidy_host_list,
+                "unresolved": unresolved,
             },
             indent=2,
         )

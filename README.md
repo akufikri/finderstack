@@ -93,16 +93,14 @@ linked command reads `fingerprints.json` from the repository.
   },
   "dns": {
     "a": ["203.0.113.10"],
-    "aaaa": [],
-    "mx": ["10 mail.example.com."],
-    "ns": ["ns1.example.com."],
+    "mx": ["1 aspmx.mail.example.com", "10 alt1.mail.example.com"],
+    "ns": ["ns1.example.com", "ns2.example.com"],
     "txt": ["v=spf1 include:_spf.google.com ~all"]
   },
-  "subdomains": ["example.com", "www.example.com"],
-  "subdomain_sources": {
-    "subfinder": ["www.example.com"],
-    "crt.sh": ["example.com", "www.example.com"],
-    "apex": ["example.com"]
+  "subdomains": {
+    "total": 2,
+    "sources": {"subfinder": 1, "crt.sh": 2, "shared": 1},
+    "names": ["example.com", "www.example.com"]
   },
   "ips": {
     "203.0.113.10": ["example.com", "www.example.com"]
@@ -110,7 +108,6 @@ linked command reads `fingerprints.json` from the repository.
   "hosts": [
     {
       "host": "example.com",
-      "ips": ["203.0.113.10"],
       "ports": [
         {"port": 80, "service": "http", "product": "nginx", "version": "1.25.3"},
         {"port": 443, "service": "https", "product": "nginx", "version": "1.25.3"}
@@ -144,12 +141,20 @@ linked command reads `fingerprints.json` from the repository.
         ]
       }
     }
-  ]
+  ],
+  "unresolved": ["dev.example.com"]
 }
 ```
 
-`http` is `null` when no HTTP response could be read. `versions` is empty when
-the technology does not expose a public version.
+Formatting rules:
+
+- Empty fields are omitted: a host without an HTTP response has no `http` key,
+  and a host with no open ports has no `ports` key.
+- `hosts` holds only hostnames that resolve. Names with no DNS record are listed
+  under `unresolved`.
+- `dns` drops empty record types, strips trailing dots, and sorts MX by priority.
+- `subdomains.sources` counts per source; names are not repeated three times.
+- `versions` is empty when the technology does not expose a public version.
 
 ## Single-site mode
 
